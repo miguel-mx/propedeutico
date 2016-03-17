@@ -102,6 +102,7 @@ class RegistroController extends Controller
             ->add('notas', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', array(
                 'label' => 'Notas', 'required' => false
             ))
+            ->add('slug', 'Symfony\Component\Form\Extension\Core\Type\HiddenType', array('data' => $registro->getSlug()))
             ->getForm();
 
         return $this->render('registro/show.html.twig', array(
@@ -120,6 +121,7 @@ class RegistroController extends Controller
     public function evalAction(Request $request)
     {
         $registro = new Registro();
+        $data = new Registro();
 
         $evalform = $this->createFormBuilder($registro)
             ->setAction($this->generateUrl('registro_eval'))
@@ -136,7 +138,12 @@ class RegistroController extends Controller
 
         if ($evalform->isSubmitted() && $evalform->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($registro);
+            $data = $em->getRepository('PropeBundle:Registro')->findBySlug($evalform->getData('slug'));
+
+            $data->setConcedido($evalform->getData('concedido'));
+            $data->setNotas($evalform->getData('notas'));
+
+            $em->persist($data);
             $em->flush();
 
             $request->getSession()
@@ -145,8 +152,15 @@ class RegistroController extends Controller
             ;
         }
 
-        return $this->redirect($this->generateUrl('registro_show', array('slug' => 'miguel-angel-magana-lemus-28')));
+        return $this->redirect($this->generateUrl('registro_show', array('slug' => $data->getSlug())));
 //        {{ path('registro_show', { 'slug': registro.slug }) }}
+
+/*        return $this->render('registro/new.html.twig', array(
+            'registro' => $registro,
+            'form' => $form->createView(),
+        ));
+   */
+
     }
 
 
