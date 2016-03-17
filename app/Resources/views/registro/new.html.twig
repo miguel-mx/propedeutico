@@ -1,0 +1,212 @@
+{% extends 'base.html.twig' %}
+{% block nav %}
+{% endblock %}
+
+{% block body %}
+    <div class="jumbotron" xmlns="http://www.w3.org/1999/html">
+        <h2>Taller Propedéutico de Ingreso al <br />
+            Posgrado Conjunto en Ciencias Matemáticas<br />
+            2016</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="text-muted">Registro y solicitud de beca</h2>
+        </div>
+    </div>
+    <h1></h1>
+
+    {{ form_start(form) }}
+    <div class="alert-danger">{{ form_errors(form) }}</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.nombre) }}
+                {{ form_widget(form.nombre, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.nombre) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.apellidos) }}
+                {{ form_widget(form.apellidos, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.apellidos) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.correo) }}
+                {{ form_widget(form.correo, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.correo) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <hr>
+            <div class="form-group">
+                {{ form_label(form.ciudad) }}
+                {{ form_widget(form.ciudad, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.ciudad) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(form.estado) }}
+                {{ form_widget(form.estado, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.estado) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Institución de origen</label>
+                {{ form_widget(form.institucion, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.institucion) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <hr>
+            <div class="form-group">
+                <label>Seleccione una de las dos opciones para el Curso 3</label> <button class="btn btn-link"  data-toggle="modal" data-target="#progModal" >Ver programa completo...</button>
+                {{ form_widget(form.curso, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.curso) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label>Describa porqué desea participar en el propedéutico:</label>
+                {{ form_widget(form.intencion, {'attr': {'class': 'form-control', 'rows': '10'}}) }}
+                <span class="text-danger">{{ form_errors(form.intencion) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Beca</label>
+                {{ form_widget(form.beca, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(form.beca) }}</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info" role="alert">
+                La beca consiste en: <strong>hospedaje, alimentación y traslados hotel-CCM-hotel.</strong><br>
+                <span class="text-danger">Se proporcionará hospedaje a los asistentes que no radiquen en Morelia.</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                {#{{ form_label(form.kardexFile) }}#}
+                {{ form_widget(form.kardexFile, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block">Subir archivo Kardex en formato PDF.</p>
+                <span class="text-danger">{{ form_errors(form.kardexFile) }}</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">'Kardex' académico de licenciatura y/o posgrado con descripción de cursos asistidos hasta el momento.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                {{ form_widget(form.recomendacionFile, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block">Subir archivo de Recomendación en formato PDF.</p>
+                <span class="text-danger">{{ form_errors(form.recomendacionFile) }}</span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="alert alert-info">Carta de recomendación por parte de un tutor, asesor o coordinador de carrera.</div>
+        </div>
+    </div>
+
+    {{ form_widget(form) }}
+
+    <h1></h1>
+    <input class="btn btn-primary" type="submit" value="Enviar solicitud" />
+
+    {{ form_end(form) }}
+    <h1></h1>
+    <h1></h1>
+
+    <!-- Modal -->
+    <div class="modal fade" id="progModal" tabindex="-1" role="dialog" aria-labelledby="progLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="progLabel">Programa tentativo</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered text-center">
+                                <thead>
+                                <tr class="text-center">
+                                    <th>Hr.</th>
+                                    <th>Lu 30 de mayo</th>
+                                    <th>Ma 31 de mayo</th>
+                                    <th>Mi 1 de junio</th>
+                                    <th>Ju 2 de junio</th>
+                                    <th>Vi 3 de junio</th>
+                                    <th>Sa 4 de junio</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>08:00</td><td colspan="5" class="active">Autobus al CCM</td></tr>
+                                    <tr><td>10:00</td><td class="info">Curso 1</td><td class="success">Curso 3</td><td class="info">Curso 1</td><td class="success">Curso 3</td><td class="info">Curso 1</td><td rowspan="6" class="danger">Examen <br>de ingreso<br> al PCCM</td></tr>
+                                    <tr><td>10:00</td><td colspan="5" class="active">Receso</td></tr>
+                                    <tr><td>10:20</td><td class="info">Curso 1</td><td class="success">Curso 3</td><td class="info">Curso 1</td><td class="success">Curso 3</td><td class="info">Curso 1</td></tr>
+                                    <tr><td>11:20</td><td colspan="5" class="active">Receso</td></tr>
+                                    <tr><td>11:40</td><td class="warning">Curso 2</td><td class="info">Curso 1</td><td class="warning">Curso 2</td><td class="info">Curso 1</td><td class="warning">Curso 2</td></tr>
+                                    <tr><td>12:40</td><td colspan="5" class="active">Receso</td></tr>
+                                    <tr><td>13:00</td><td colspan="5" class="warning">Curso 2</td></tr>
+                                    <tr><td>14:00</td><td colspan="5" class="active">Comida</td></tr>
+                                    <tr><td>15:40</td><td class="charla1">Charla 1</td><td class="charla2">Charla 2</td><td class="charla3">Charla 3</td><td class="charla4">Charla 4</td><td class="charla5">Charla 5</td></tr>
+                                    <tr><td>16:40</td><td colspan="5" class="active">Receso</td></tr>
+                                    <tr><td>17:00</td><td colspan="5"  class="danger">Sesión de ejercicios</td></tr>
+                                    <tr><td>18:20</td><td colspan="5" class="active">Autobus al hotel</td></tr>
+                                    <tr>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="col-lg-8">
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr  class="info"><td>Curso 1</td><td>Álgebra lineal, Gerardo Raggi.</td></tr>
+                                    <tr class="warning"><td>Curso 2</td><td>Cálculo diferencial e integral, Robert Oeckl.</td></tr>
+                                    <tr class="success"><td >Curso 3</td><td>Introducción a la Física Matemática, José Antonio Zapata.</td></tr>
+                                    <tr class="success"><td>Curso 3</td><td>Tópicos en combinatoria, María Luisa Pérez.</td></tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr class="charla1"><td>Charla 1</td><td>Daniel Juan.</td></tr>
+                                    <tr class="charla2"><td>Charla 2</td><td>Ariet Ramos.</td></tr>
+                                    <tr class="charla3"><td>Charla 3</td><td><a data-target="#charla3Modal" data-toggle="modal" href="#">Rocío Gonzalez: ¿Cómo usar matemáticas para el entendimiento de la Epilepsia?</a></td></tr>
+                                    <tr class="charla4"><td>Charla 4</td><td><a data-target="#charla4Modal" data-toggle="modal" href="#">Abdon Choque: Polinomios de Hurwitz y polinomios ortogonales.</a></td></tr>
+                                    <tr class="charla5"><td>Charla 5</td><td>Ferrán Valdéz.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

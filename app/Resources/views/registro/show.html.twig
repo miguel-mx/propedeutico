@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                <p class="lead"><i class="fa fa-check-"></i> {{ msg }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="page-header">
+        <h2>Taller Propedéutico de Ingreso<br>
+        al Posgrado Conjunto en Ciencias Matemáticas <br>
+        2016</h2>
+    </div>
+    <h1></h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ registro.apellidos }} {{ registro.nombre }} <em>({{ registro.correo }})</em></h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group text-muted">
+                        <li class="list-group-item"><strong>Universidad:</strong> {{ registro.institucion }}</li>
+                        <li class="list-group-item"><strong>Residencia:</strong> {{ registro.ciudad }}, {{ registro.estado }}</li>
+                    </ul>
+                    <div class="alert alert-info"><strong>{{ registro.curso }}</strong></div>
+                    <strong>Carta de intención</strong>
+                    <div class="well">
+                        {{ registro.intencion }}
+                    </div>
+                    <p>
+                    <strong>{{ registro.concedido ? '<i class="fa fa-check fa-lg fa-border text-success"></i>' : '<i class="fa fa-times fa-lg fa-border text-danger"></i>' }}
+                        Beca</strong> {{ registro.beca }}
+                    </p>
+                    <p><strong>Documentos:</strong></p>
+                    <ul class="list-group text-muted">
+                        <li class="list-group-item"><strong><i class="fa fa-file-pdf-o"></i> Kardex:</strong> <a href="{{ vich_uploader_asset(registro, 'kardexFile') }}">{{ registro.kardexName }}</a></li>
+                        <li class="list-group-item"><strong><i class="fa fa-file-pdf-o"></i> Recomendacion:</strong> <a href="{{ vich_uploader_asset(registro, 'recomendacionFile') }}">{{ registro.recomendacionName }}</a></li>
+                    </ul>
+
+                    <p class="text-right"><small><em>{{ registro.modifiedAt | localizeddate('long', 'none', 'es_MX') }}</em></small></p>
+
+                    <p>
+                        <a class="btn btn-primary" href="{{ path('registro_index') }}"><i class="fa fa-undo"></i> Lista de solicitudes</a>
+                        {#<a class="btn btn-warning" href="{{ path('registro_edit', { 'slug': registro.slug })  }}"><i class="fa fa-pencil-square-o"></i> Editar</a>#}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default panel-success">
+                <div class="panel-heading">
+                    <strong class="text-muted">Evaluación de la solicitud</strong>
+                </div>
+                <div class="panel-body">
+                    {% if app.session.flashBag.has('success') %}
+                        <div class="alert alert-success">
+                            {% for msg in app.session.flashBag.get('success') %}
+                                <p class="lead"><i class="fa fa-check-"></i> {{ msg }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    {{ form_start(eval_form) }}
+
+                    <div class="alert-danger">{{ form_errors(eval_form) }}</div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    {{ form_widget(eval_form.concedido) }}
+                                    <strong>Otorgar beca</strong>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Notas de evaluación:</label>
+                                {{ form_widget(eval_form.notas, {'attr': {'class': 'form-control', 'rows': '5'}}) }}
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_widget(eval_form) }}
+                    <h1></h1>
+                    <input class="btn btn-primary" type="submit" value="Evaluar solicitud" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

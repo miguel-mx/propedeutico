@@ -1,0 +1,21 @@
+Taller Propedéutico de Ingreso
+al Posgrado Conjunto en Ciencias Matemáticas
+2016
+
+Hemos recibido su solicitud de beca con los siguientes datos:
+
+Nombre: {{ registro.apellidos |capitalize }} {{ registro.nombre |capitalize }}
+
+Institución de origen: {{ registro.institucion }}
+
+{{ registro.ciudad }}, {{ registro.estado }}
+
+Curso seleccionado: {{ registro.curso }}
+
+Justificación:
+
+{{ registro.intencion | wordwrap(80) }}
+
+Beca: {{ registro.beca }}
+
+La lista de solicitudes aceptadas será publicada en la página web del Taller Propedéutico a más tardar el 20 de mayo.

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+{% endblock %}
+
+{% block body %}
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                <p class="lead"><i class="fa fa-check-"></i> {{ msg }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="page-header">
+        <h2>Taller Propedéutico de Ingreso<br>
+        al Posgrado Conjunto en Ciencias Matemáticas <br>
+        2016</h2>
+    </div>
+    <h1></h1>
+    <div class="alert alert-warning"><p><i class="fa fa-envelope-o"></i> Recibirá un correo electrónico con la confirmación de su solicitud.<br>
+        La lista de solicitudes aceptadas será publicada en la página web del Taller Propedéutico a más tardar <strong>el 20 de mayo.</strong></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{ registro.apellidos }} {{ registro.nombre }} <em>({{ registro.correo }})</em></h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group text-muted">
+                        <li class="list-group-item"><strong>Universidad:</strong> {{ registro.institucion }}</li>
+                        <li class="list-group-item"><strong>Residencia:</strong> {{ registro.ciudad }}, {{ registro.estado }}</li>
+                    </ul>
+                    <div class="alert alert-info"><strong>{{ registro.curso }}</strong></div>
+                    <strong>Carta de intención</strong>
+                    <div class="well">
+                        {{ registro.intencion }}
+                    </div>
+                    <p>
+                    <strong>Beca</strong> {{ registro.beca }}
+                    </p>
+                    <p><strong>Documentos:</strong></p>
+                    <ul class="list-group text-muted">
+                        <li class="list-group-item"><strong><i class="fa fa-file-pdf-o"></i> Kardex:</strong> <a href="{{ vich_uploader_asset(registro, 'kardexFile') }}">{{ registro.kardexName }}</a></li>
+                        <li class="list-group-item"><strong><i class="fa fa-file-pdf-o"></i> Recomendacion:</strong> <a href="{{ vich_uploader_asset(registro, 'recomendacionFile') }}">{{ registro.recomendacionName }}</a></li>
+                    </ul>
+
+                    <p class="text-right"><small><em>{{ registro.modifiedAt | localizeddate('long', 'none', 'es_MX') }}</em></small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary" href="#"><i class="fa fa-undo"></i> Regresar al sitio web del Propedéutico</a>
+    <h1></h1>
+
+{% endblock %}

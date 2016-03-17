@@ -1,0 +1,7 @@
+prope:
+    resource: "@PropeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+logout:
+    path: /logout

@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="text-muted">Edición de registro</h2>
+
+    {{ form_start(edit_form) }}
+    <div class="alert-danger">{{ form_errors(edit_form) }}</div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(edit_form.nombre) }}
+                {{ form_widget(edit_form.nombre, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.nombre) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(edit_form.apellidos) }}
+                {{ form_widget(edit_form.apellidos, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.apellidos) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(edit_form.correo) }}
+                {{ form_widget(edit_form.correo, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.correo) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <hr>
+            <div class="form-group">
+                {{ form_label(edit_form.ciudad) }}
+                {{ form_widget(edit_form.ciudad, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.ciudad) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                {{ form_label(edit_form.estado) }}
+                {{ form_widget(edit_form.estado, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.estado) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Institución de origen</label>
+                {{ form_widget(edit_form.institucion, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.institucion) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <hr>
+            <div class="form-group">
+                <label>Seleccione una de las dos opciones para el Curso 3</label>
+                {{ form_widget(edit_form.curso, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.curso) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10">
+            <div class="form-group">
+                <label>Describa porqué desea participar en el propedéutico:</label>
+                {{ form_widget(edit_form.intencion, {'attr': {'class': 'form-control', 'rows': '10'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.intencion) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Beca</label>
+                {{ form_widget(edit_form.beca, {'attr': {'class': 'form-control'}}) }}
+                <span class="text-danger">{{ form_errors(edit_form.beca) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                {#{{ form_label(form.kardexFile) }}#}
+                {{ form_widget(edit_form.kardexFile, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block">Subir archivo Kardex en formato PDF.</p>
+                <span class="text-danger">{{ form_errors(edit_form.kardexFile) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                {{ form_widget(edit_form.recomendacionFile, {'attr': {'class': 'form-control'}}) }}
+                <p class="help-block">Subir archivo de Recomendación en formato PDF.</p>
+                <span class="text-danger">{{ form_errors(edit_form.recomendacionFile) }}</span>
+            </div>
+        </div>
+    </div>
+
+    {{ form_widget(edit_form) }}
+
+    <h1></h1>
+    <input class="btn btn-primary" type="submit" value="Editar solicitud" />
+    <a class="btn btn-success" href="{{ path('registro_index') }}">Regresar</a>
+
+    {{ form_end(edit_form) }}
+    <h1></h1>
+    <h1></h1>
+
+{% endblock %}
